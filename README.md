@@ -1,6 +1,7 @@
 # Микросервис для работы с балансом пользователей
 ## Описание
 Проект выполнен в рамках тестового задания [AvitoTech](https://github.com/avito-tech/autumn-2021-intern-assignment).
+
 Стек технологий: Python, Django Rest Framework, Docker, Gunicorn, Nginx, PostgreSQL, Pytest.
 ###### Проблема:
 В нашей компании есть много различных микросервисов. Многие из них так или иначе хотят взаимодействовать с балансом пользователя. На архитектурном комитете приняли решение централизовать работу с балансом пользователя в отдельный сервис.
@@ -109,9 +110,9 @@ docker-compose down -v
 ```
 
 ## Примеры
-##### Получаем confirmation_code
 Для формирования запросов и ответов использована программа [Postman](https://www.postman.com/).
 
+#### Получаем confirmation_code
 Отправляем POST-запрос на адрес `http://127.0.0.1/api/v1/auth/email/` 
 
 - Обязательное поле: `email`
@@ -127,7 +128,7 @@ Content-Type: application/json
 
 Код подтверждения будет отправлен на e-mail адрес.
 
-##### Получаем token
+#### Получаем token
 Отправляем POST-запрос для получения JWT-токена на адрес `http://127.0.0.1/api/v1/auth/token/`.
 - Обязательное поле: `email`,
 - Обязательное поле: `confirmation_code`
@@ -141,14 +142,14 @@ Content-Type: application/json
 }
 ```
 
-##### Профиль
+#### Профиль
 Отправляем GET-запрос на адрес `http://127.0.0.1/api/v1/users/me/`.
 ```json
 GET http://127.0.0.1/api/v1/users/me/
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY0MDIyOTU2LCJqdGkiOiJhOThhNzY5ZjM3MjQ0OGI2YjNkZmU2ZWZhZTk3ZjQ5MyIsInVzZXJfaWQiOjN9.up2BFy3C_Yd3WrsiZLO3EQbZ5DZMqqmfAOXF0lrlIw0
 Content-Type: application/json
 ```
-##### Редактирование информации в профиле
+#### Редактирование информации в профиле
 Отправляем PATCH-запрос на адрес `http://127.0.0.1/api/v1/users/me/`.
 ```json
 PATCH http://127.0.0.1/api/v1/users/me/
@@ -163,29 +164,36 @@ Content-Type: application/json
 }
 ```
 
-##### Создание счёта
+#### Создание счёта
 Отправляем POST-запрос на адрес `http://127.0.0.1/api/v1/accounts/`.
 ```json
 POST http://127.0.0.1/api/v1/accounts/
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY0MDIyOTU2LCJqdGkiOiJhOThhNzY5ZjM3MjQ0OGI2YjNkZmU2ZWZhZTk3ZjQ5MyIsInVzZXJfaWQiOjN9.up2BFy3C_Yd3WrsiZLO3EQbZ5DZMqqmfAOXF0lrlIw0
 Content-Type: application/json
 ```
-##### Информация о счёте
+#### Информация о счёте
 Отправляем GET-запрос на адрес `http://127.0.0.1/api/v1/accounts/`.
 ```json
 GET http://127.0.0.1/api/v1/accounts/
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY0MDIyOTU2LCJqdGkiOiJhOThhNzY5ZjM3MjQ0OGI2YjNkZmU2ZWZhZTk3ZjQ5MyIsInVzZXJfaWQiOjN9.up2BFy3C_Yd3WrsiZLO3EQbZ5DZMqqmfAOXF0lrlIw0
 Content-Type: application/json
 ```
+#### Получение баланса в отличной от рубля валюте
+Отправляем GET-запрос на адрес `http://127.0.0.1/api/v1/accounts/?currency={CURRENCY}`.
+```json
+GET http://127.0.0.1/api/v1/accounts/?currency={CURRENCY}
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY0MDIyOTU2LCJqdGkiOiJhOThhNzY5ZjM3MjQ0OGI2YjNkZmU2ZWZhZTk3ZjQ5MyIsInVzZXJfaWQiOjN9.up2BFy3C_Yd3WrsiZLO3EQbZ5DZMqqmfAOXF0lrlIw0
+Content-Type: application/json
+```
 
-##### Список пополнений счёта
+#### Список пополнений счёта
 Отправляем GET-запрос на адрес `http://127.0.0.1/api/v1/actions/`.
 ```json
 GET http://127.0.0.1/api/v1/actions/
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY0MDIyOTU2LCJqdGkiOiJhOThhNzY5ZjM3MjQ0OGI2YjNkZmU2ZWZhZTk3ZjQ5MyIsInVzZXJfaWQiOjN9.up2BFy3C_Yd3WrsiZLO3EQbZ5DZMqqmfAOXF0lrlIw0
 Content-Type: application/json
 ```
-##### Пополнение счёта
+#### Пополнение счёта
 Отправляем POST-запрос на адрес `http://127.0.0.1/api/v1/actions/`.
 ```json
 POST http://127.0.0.1/api/v1/actions/
@@ -198,14 +206,14 @@ Content-Type: application/json
 }
 ```
 
-##### Список услуг
+#### Список услуг
 Отправляем GET-запрос на адрес `http://127.0.0.1/api/v1/services/`.
 ```json
 GET http://127.0.0.1/api/v1/services/
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY0MDIyOTU2LCJqdGkiOiJhOThhNzY5ZjM3MjQ0OGI2YjNkZmU2ZWZhZTk3ZjQ5MyIsInVzZXJfaWQiOjN9.up2BFy3C_Yd3WrsiZLO3EQbZ5DZMqqmfAOXF0lrlIw0
 Content-Type: application/json
 ```
-##### Приобретение услуги
+#### Приобретение услуги
 Отправляем GET-запрос на адрес `http://127.0.0.1/api/v1/services/{id}/purchase/`.
 ```json
 GET http://127.0.0.1/api/v1/services/{id}/purchase/
@@ -213,7 +221,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiY
 Content-Type: application/json
 ```
 
-##### Список приобретенных услуг
+#### Список приобретенных услуг
 Отправляем GET-запрос на адрес `http://127.0.0.1/api/v1/transactions/`.
 ```json
 GET http://127.0.0.1/api/v1/transactions/
@@ -221,21 +229,21 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiY
 Content-Type: application/json
 ```
 
-##### Список денежных переводов с вашего аккаунта
+#### Список денежных переводов с вашего аккаунта
 Отправляем GET-запрос на адрес `http://127.0.0.1/api/v1/transfers/`.
 ```json
 GET http://127.0.0.1/api/v1/transfers/
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY0MDIyOTU2LCJqdGkiOiJhOThhNzY5ZjM3MjQ0OGI2YjNkZmU2ZWZhZTk3ZjQ5MyIsInVzZXJfaWQiOjN9.up2BFy3C_Yd3WrsiZLO3EQbZ5DZMqqmfAOXF0lrlIw0
 Content-Type: application/json
 ```
-##### Список денежных переводов на ваш аккаунт
+#### Список денежных переводов на ваш аккаунт
 Отправляем GET-запрос на адрес `http://127.0.0.1/api/v1/transfers/to_my_account/`.
 ```json
 GET http://127.0.0.1/api/v1/transfers/to_my_account/
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY0MDIyOTU2LCJqdGkiOiJhOThhNzY5ZjM3MjQ0OGI2YjNkZmU2ZWZhZTk3ZjQ5MyIsInVzZXJfaWQiOjN9.up2BFy3C_Yd3WrsiZLO3EQbZ5DZMqqmfAOXF0lrlIw0
 Content-Type: application/json
 ```
-##### Перевод денежных средств
+#### Перевод денежных средств
 Отправляем POST-запрос на адрес `http://127.0.0.1/api/v1/transfers/`.
 Оценка произведения производится по 10-ти бальной шкале.
 ```json
