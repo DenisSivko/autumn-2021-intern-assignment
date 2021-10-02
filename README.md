@@ -251,7 +251,6 @@ Content-Type: application/json
 ***
 ### Перевод денежных средств
 Отправляем POST-запрос на адрес `http://127.0.0.1/api/v1/transfers/`.
-Оценка произведения производится по 10-ти бальной шкале.
 ```json
 POST http://127.0.0.1/api/v1/transfers/
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY0MDIyOTU2LCJqdGkiOiJhOThhNzY5ZjM3MjQ0OGI2YjNkZmU2ZWZhZTk3ZjQ5MyIsInVzZXJfaWQiOjN9.up2BFy3C_Yd3WrsiZLO3EQbZ5DZMqqmfAOXF0lrlIw0
