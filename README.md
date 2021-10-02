@@ -3,27 +3,27 @@
 Проект выполнен в рамках тестового задания [AvitoTech](https://github.com/avito-tech/autumn-2021-intern-assignment).
 
 Стек технологий: Python, Django Rest Framework, Docker, Gunicorn, Nginx, PostgreSQL, Pytest.
-##### Проблема:
+#### Проблема:
 В нашей компании есть много различных микросервисов. Многие из них так или иначе хотят взаимодействовать с балансом пользователя. На архитектурном комитете приняли решение централизовать работу с балансом пользователя в отдельный сервис.
 
-##### Задача:
+#### Задача:
 Необходимо реализовать микросервис для работы с балансом пользователей (зачисление средств, списание средств, перевод средств от пользователя к пользователю, а также метод получения баланса пользователя). Сервис должен предоставлять HTTP API и принимать/отдавать запросы/ответы в формате JSON.
 
 ## Установка
-##### Шаг 1. Проверьте установлен ли у вас Docker
+#### Шаг 1. Проверьте установлен ли у вас Docker
 Прежде, чем приступать к работе, необходимо знать, что Docker установлен. Для этого достаточно ввести:
 ```bash
 docker -v
 ```
 Или скачайте [Docker Desktop](https://www.docker.com/products/docker-desktop) для Mac или Windows. [Docker Compose](https://docs.docker.com/compose) будет установлен автоматически. В Linux убедитесь, что у вас установлена последняя версия [Compose](https://docs.docker.com/compose/install/). Также вы можете воспользоваться официальной [инструкцией](https://docs.docker.com/engine/install/).
 
-##### Шаг 2. Клонируйте репозиторий себе на компьютер
+#### Шаг 2. Клонируйте репозиторий себе на компьютер
 Введите команду:
 ```bash
 git clone https://github.com/DenisSivko/autumn-2021-intern-assignment.git
 ```
 
-##### Шаг 3. Создайте в клонированной директории файл .env
+#### Шаг 3. Создайте в клонированной директории файл .env
 Пример:
 ```bash
 SECRET_KEY=p&l%385148kslhtyn^##a1)ilz@4zqj=rq&agdol^##zgl9(vs
@@ -41,32 +41,32 @@ EMAIL_HOST_PASSWORD=...
 EMAIL_PORT=...
 ```
 
-##### Шаг 4. Запуск docker-compose
+#### Шаг 4. Запуск docker-compose
 Для запуска необходимо выполнить из директории с проектом команду:
 ```bash
 docker-compose up -d
 ```
 
-##### Шаг 5. База данных
+#### Шаг 5. База данных
 Создаем и применяем миграции:
 ```bash
 docker-compose exec web python manage.py makemigrations --noinput
 docker-compose exec web python manage.py migrate --noinput
 ```
 
-##### Шаг 6. Подгружаем статику
+#### Шаг 6. Подгружаем статику
 Выполните команду:
 ```bash
 docker-compose exec web python manage.py collectstatic --no-input 
 ```
 
-##### Шаг 7. Заполнение базы тестовыми данными
+#### Шаг 7. Заполнение базы тестовыми данными
 Для заполнения базы тестовыми данными вы можете использовать файл fixtures.json, который находится в infra_sp2. Выполните команду:
 ```bash
 docker-compose exec web python manage.py loaddata fixtures.json
 ```
 
-##### Шаг 8. Запуск тестов
+#### Шаг 8. Запуск тестов
 Выполните команду:
 ```bash
 docker-compose exec web python manage.py test -v 2
@@ -76,14 +76,14 @@ docker-compose exec web python manage.py test -v 2
 docker-compose exec web pytest
 ```
 
-##### Документация
+#### Документация
 Документация к API доступна по адресу:
 ```json
 http://127.0.0.1/redoc/
 http://127.0.0.1/swagger/
 ```
 
-##### Другие команды
+#### Другие команды
 Создание суперпользователя:
 ```bash
 docker-compose exec web python manage.py createsuperuser
@@ -111,8 +111,8 @@ docker-compose down -v
 
 ## Примеры
 Для формирования запросов и ответов использована программа [Postman](https://www.postman.com/).
-***
-#### Получаем confirmation_code
+
+### Получаем confirmation_code
 Отправляем POST-запрос на адрес `http://127.0.0.1/api/v1/auth/email/` 
 
 - Обязательное поле: `email`
@@ -127,7 +127,7 @@ Content-Type: application/json
 ```
 Код подтверждения будет отправлен на e-mail адрес.
 ***
-#### Получаем token
+### Получаем token
 Отправляем POST-запрос для получения JWT-токена на адрес `http://127.0.0.1/api/v1/auth/token/`.
 - Обязательное поле: `email`,
 - Обязательное поле: `confirmation_code`
@@ -141,7 +141,7 @@ Content-Type: application/json
 }
 ```
 ***
-#### Профиль
+### Профиль
 Отправляем GET-запрос на адрес `http://127.0.0.1/api/v1/users/me/`.
 ```json
 GET http://127.0.0.1/api/v1/users/me/
@@ -149,7 +149,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiY
 Content-Type: application/json
 ```
 ***
-#### Редактирование информации в профиле
+### Редактирование информации в профиле
 Отправляем PATCH-запрос на адрес `http://127.0.0.1/api/v1/users/me/`.
 ```json
 PATCH http://127.0.0.1/api/v1/users/me/
@@ -164,7 +164,7 @@ Content-Type: application/json
 }
 ```
 ***
-#### Создание счёта
+### Создание счёта
 Отправляем POST-запрос на адрес `http://127.0.0.1/api/v1/accounts/`.
 ```json
 POST http://127.0.0.1/api/v1/accounts/
@@ -172,7 +172,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiY
 Content-Type: application/json
 ```
 ***
-#### Информация о счёте
+### Информация о счёте
 Отправляем GET-запрос на адрес `http://127.0.0.1/api/v1/accounts/`.
 ```json
 GET http://127.0.0.1/api/v1/accounts/
@@ -180,7 +180,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiY
 Content-Type: application/json
 ```
 ***
-#### Получение баланса в отличной от рубля валюте
+### Получение баланса в отличной от рубля валюте
 Отправляем GET-запрос на адрес `http://127.0.0.1/api/v1/accounts/?currency={CURRENCY}`.
 ```json
 GET http://127.0.0.1/api/v1/accounts/?currency={CURRENCY}
@@ -188,7 +188,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiY
 Content-Type: application/json
 ```
 ***
-#### Список пополнений счёта
+### Список пополнений счёта
 Отправляем GET-запрос на адрес `http://127.0.0.1/api/v1/actions/`.
 ```json
 GET http://127.0.0.1/api/v1/actions/
@@ -196,7 +196,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiY
 Content-Type: application/json
 ```
 ***
-#### Пополнение счёта
+### Пополнение счёта
 Отправляем POST-запрос на адрес `http://127.0.0.1/api/v1/actions/`.
 ```json
 POST http://127.0.0.1/api/v1/actions/
@@ -209,7 +209,7 @@ Content-Type: application/json
 }
 ```
 ***
-#### Список услуг
+### Список услуг
 Отправляем GET-запрос на адрес `http://127.0.0.1/api/v1/services/`.
 ```json
 GET http://127.0.0.1/api/v1/services/
@@ -217,7 +217,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiY
 Content-Type: application/json
 ```
 ***
-#### Приобретение услуги
+### Приобретение услуги
 Отправляем GET-запрос на адрес `http://127.0.0.1/api/v1/services/{id}/purchase/`.
 ```json
 GET http://127.0.0.1/api/v1/services/{id}/purchase/
@@ -225,7 +225,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiY
 Content-Type: application/json
 ```
 ***
-#### Список приобретенных услуг
+### Список приобретенных услуг
 Отправляем GET-запрос на адрес `http://127.0.0.1/api/v1/transactions/`.
 ```json
 GET http://127.0.0.1/api/v1/transactions/
@@ -233,7 +233,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiY
 Content-Type: application/json
 ```
 ***
-#### Список денежных переводов с вашего аккаунта
+### Список денежных переводов с вашего аккаунта
 Отправляем GET-запрос на адрес `http://127.0.0.1/api/v1/transfers/`.
 ```json
 GET http://127.0.0.1/api/v1/transfers/
@@ -241,7 +241,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiY
 Content-Type: application/json
 ```
 ***
-#### Список денежных переводов на ваш аккаунт
+### Список денежных переводов на ваш аккаунт
 Отправляем GET-запрос на адрес `http://127.0.0.1/api/v1/transfers/to_my_account/`.
 ```json
 GET http://127.0.0.1/api/v1/transfers/to_my_account/
@@ -249,7 +249,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiY
 Content-Type: application/json
 ```
 ***
-#### Перевод денежных средств
+### Перевод денежных средств
 Отправляем POST-запрос на адрес `http://127.0.0.1/api/v1/transfers/`.
 Оценка произведения производится по 10-ти бальной шкале.
 ```json
