@@ -35,10 +35,10 @@ POSTGRES_PASSWORD=postgres
 DB_HOST=db
 DB_PORT=5432
 
-EMAIL_HOST=...
-EMAIL_HOST_USER=...
-EMAIL_HOST_PASSWORD=...
-EMAIL_PORT=...
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_HOST_USER='apiavito@gmail.com'
+EMAIL_HOST_PASSWORD='password'
+EMAIL_PORT=587
 ```
 
 #### Шаг 4. Запуск docker-compose
@@ -118,7 +118,7 @@ docker-compose down -v
 - Обязательное поле: `email`
 
 ```json
-POST   http://127.0.0.1/api/v1/auth/email/
+POST http://127.0.0.1/api/v1/auth/email/
 Content-Type: application/json
 
 {
@@ -132,7 +132,7 @@ Content-Type: application/json
 - Обязательное поле: `email`,
 - Обязательное поле: `confirmation_code`
 ```json
-POST   http://127.0.0.1/api/v1/auth/token/
+POST http://127.0.0.1/api/v1/auth/token/
 Content-Type: application/json
 
 {
